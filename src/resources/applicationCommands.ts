@@ -1,9 +1,7 @@
-import { ChannelTypes, Locale, Snowflake } from "./abc"
+import { Locale, Snowflake } from "./abc"
+import { ChannelType } from "./channel"
 
-/**
- * Represents an application command from Discord.
- */
-export interface ApplicationCommand {
+export type ApplicationCommand = {
   id: Snowflake
   type: ApplicationCommandType
   applicationId: Snowflake
@@ -18,24 +16,17 @@ export interface ApplicationCommand {
   defaultPermission?: boolean | null
   version: Snowflake
 }
-export type SlashCommand = ApplicationCommand
-export type Command = ApplicationCommand
 
-/**
- * Represents the types of application commands from Discord.
- */
 export enum ApplicationCommandType {
   ChatInput = 1,
   User = 2,
   Message = 3
 }
-export type SlashCommandType = ApplicationCommandType
-export type CommandType = ApplicationCommandType
 
 /**
  * Represents an option of an application command from Discord.
  */
-export interface ApplicationCommandOption {
+export type ApplicationCommandOption = {
   type: ApplicationCommandOptionType
   name: string
   nameLocalizations?: { Locale: string } | null
@@ -51,13 +42,7 @@ export interface ApplicationCommandOption {
   maxLength?: number
   autocomplete?: boolean
 }
-export type SlashCommandOption = ApplicationCommandOption
-export type CommandOption = ApplicationCommandOption
-export type Option = ApplicationCommandOption
 
-/**
- * Represents the types of options for application commands from Discord.
- */
 export enum ApplicationCommandOptionType {
   SubCommand = 1,
   SubCommandGroup = 2,
@@ -71,22 +56,12 @@ export enum ApplicationCommandOptionType {
   Number = 10,
   Attachment = 11
 }
-export type SlashCommandOptionType = ApplicationCommandOptionType
-export type CommandOptionType = ApplicationCommandOptionType
-export type OptionType = ApplicationCommandOptionType
 
-/**
- * Represents a choice for an option in an application command from Discord.
- */
-export interface ApplicationCommandOptionChoice {
+export type ApplicationCommandOptionChoice = {
   name: string
   nameLocalizations?: { Locale: string } | null
   value: string | number
 }
-export type SlashCommandOptionChoice = ApplicationCommandOptionChoice
-export type CommandOptionChoice = ApplicationCommandOptionChoice
-export type OptionChoice = ApplicationCommandOptionChoice
-export type Choice = ApplicationCommandOptionChoice
 
 export class ApplicationGuildCommandPermissions {
   id: Snowflake
@@ -110,9 +85,6 @@ export class ApplicationGuildCommandPermissions {
     return this.id.value - 1
   }
 }
-export type SlashGuildCommandPermissions = ApplicationGuildCommandPermissions
-export type GuildCommandPermissions = ApplicationGuildCommandPermissions
-export type GuildPermissions = ApplicationGuildCommandPermissions
 
 export class ApplicationCommandPermissions {
   id: Snowflake
@@ -133,15 +105,9 @@ export class ApplicationCommandPermissions {
     return this.id.value - 1
   }
 }
-export type SlashCommandPermissions = ApplicationCommandPermissions
-export type CommandPermissions = ApplicationCommandPermissions
-export type Permissions = ApplicationCommandPermissions
 
 export enum ApplicationCommandPermissionType {
   Role = 1,
   User = 2,
   Channel = 3
 }
-export type SlashCommandPermissionType = ApplicationCommandPermissionType
-export type CommandPermissionType = ApplicationCommandPermissionType
-export type PermissionType = ApplicationCommandPermissionType

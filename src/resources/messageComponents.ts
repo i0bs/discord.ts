@@ -1,4 +1,5 @@
-import {ChannelTypes, PartialEmoji} from "./abc"
+import { ChannelTypes } from "./abc"
+import { PartialEmoji } from "./emoji"
 
 export interface Component {
   type: ComponentType
@@ -109,7 +110,7 @@ export class SelectMenu implements Component {
     else if (placeholder.length > 150) throw new Error("Placeholder must be 150 characters or less.")
     else if (minValues > 25 || minValues < 0) throw new Error("The minimum amount of values must be between 0-25.")
     else if (maxValues > 25 || maxValues < 1) throw new Error("The maximum amount of values must be between 1-25.")
-    else if (.options && type != ComponentType.StringSelect) throw new Error("Options are required for string selects.")
+    else if (options && type != ComponentType.StringSelect) throw new Error("Options are required for string selects.")
     else if (channelTypes && type != ComponentType.StringSelect) throw new Error("Channel types can only be used on string selects.")
     else {
       this.type = type
@@ -123,7 +124,6 @@ export class SelectMenu implements Component {
     }
   }
 }
-export type Menu = SelectMenu
 
 export class SelectMenuOption {
   label: string
@@ -151,8 +151,6 @@ export class SelectMenuOption {
     }
   }
 }
-export type MenuOption = SelectMenuOption
-export type SelectOption = SelectMenuOption
 
 export class TextInput implements Component {
   type = ComponentType.TextInput
