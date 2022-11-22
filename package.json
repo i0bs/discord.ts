@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/i0bs/discord#readme",
   "dependencies": {
+    "fastify": "^4.10.2",
     "node-fetch": "^3.3.0"
   }
 }
