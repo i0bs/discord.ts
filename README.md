@@ -2,6 +2,8 @@
 
 A TypeScript API wrapper for Discord.
 
+**THIS IS STILL UNDER DEVELOPMENT. PLEASE DO NOT USE FOR PRODUCTION!**
+
 ## Motive
 
 After a year of being an official library developer for the Discord ecosystem,
