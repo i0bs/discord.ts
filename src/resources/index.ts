@@ -1,7 +1,1 @@
 export * from "./abc"
-export * from "./application"
-export * from "./applicationCommands"
-export * from "./autoModeration"
-export * from "./channel"
-export * from "./emoji"
-export * from "./messageComponents"
