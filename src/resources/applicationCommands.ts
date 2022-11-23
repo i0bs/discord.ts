@@ -7,9 +7,9 @@ export type ApplicationCommand = {
   applicationId: Snowflake
   guildId: Snowflake
   name: string
-  nameLocalizations?: { Locale: string } | null
+  nameLocalizations?: Partial<Record<Locale, string>> | null
   description: string
-  descriptionLocalizations?: { Locale: string } | null
+  descriptionLocalizations?: Partial<Record<Locale, string>> | null
   options?: ApplicationCommandOption[]
   defaultMemberPermissions?: string | null
   dmPermission?: boolean
@@ -29,13 +29,13 @@ export enum ApplicationCommandType {
 export type ApplicationCommandOption = {
   type: ApplicationCommandOptionType
   name: string
-  nameLocalizations?: { Locale: string } | null
+  nameLocalizations?: Partial<Record<Locale, string>> | null
   description: string
-  descriptionLocalizations?: { Locale: string } | null
+  descriptionLocalizations?: Partial<Record<Locale, string>> | null
   required?: boolean
   choices?: ApplicationCommandOptionChoice[]
   options?: ApplicationCommandOption[]
-  channelTypes: ChannelTypes[]
+  channelTypes: ChannelType[]
   minValue?: number | bigint
   maxValue?: number | bigint
   minLength?: number
@@ -59,27 +59,17 @@ export enum ApplicationCommandOptionType {
 
 export type ApplicationCommandOptionChoice = {
   name: string
-  nameLocalizations?: { Locale: string } | null
+  nameLocalizations?: Partial<Record<Locale, string>> | null
   value: string | number
 }
 
 export class ApplicationGuildCommandPermissions {
-  id: Snowflake
-  applicationId: Snowflake
-  guildId: Snowflake
-  permissions: ApplicationCommandPermissions[]
-
   constructor(
-    id: Snowflake,
-    applicationId: Snowflake,
-    guildId: Snowflake,
-    permissions: ApplicationCommandPermissions[]
-  ) {
-    this.id = id
-    this.applicationId = applicationId
-    this.guildId = guildId
-    this.permissions = permissions
-  }
+    public id: Snowflake,
+    public applicationId: Snowflake,
+    public guildId: Snowflake,
+    public permissions: ApplicationCommandPermissions[]
+  ) {}
 
   allChannels(): number {
     return this.id.value - 1
@@ -87,19 +77,11 @@ export class ApplicationGuildCommandPermissions {
 }
 
 export class ApplicationCommandPermissions {
-  id: Snowflake
-  type: ApplicationCommandPermissionType
-  permission: boolean
-
   constructor(
-    id: Snowflake,
-    type: ApplicationCommandPermissionType,
-    permission: boolean
-  ) {
-    this.id = id
-    this.type = type
-    this.permission = permission
-  }
+    public id: Snowflake,
+    public type: ApplicationCommandPermissionType,
+    public permission: boolean
+  ) {}
 
   allChannels(): number {
     return this.id.value - 1

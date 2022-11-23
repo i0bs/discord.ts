@@ -1,13 +1,10 @@
 export class Snowflake {
-    value: number
     readonly timestamp: number
     readonly workerId: number
     readonly processId: number
     readonly increment: number
 
-    constructor(value: string | number) {
-      this.value = value as number
-
+    constructor(public value: number) {
       this.timestamp = (this.value >> 22) + 1420070400000
       this.workerId = (this.value & 0x3E0000) >> 17
       this.processId = (this.value & 0x1F000) >> 12
@@ -16,6 +13,10 @@ export class Snowflake {
 
     toString(): string {
         return this.value as unknown as string
+    }
+
+    toDate(): Date {
+        return new Date(this.timestamp)
     }
 }
 

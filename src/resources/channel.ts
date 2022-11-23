@@ -1,75 +1,44 @@
 import { Snowflake } from "./abc"
 
 export class Channel {
-  id: Snowflake
-  type: ChannelType
-  guildId: Snowflake
-  position?: number
-//  permissionOverwrites?: PermissionOverwrite
-  name?: string | null
-  topic?: string | null
-  nsfw?: boolean
-  lastMessageId?: Snowflake | null
-  bitrate?: number
-  userLimit?: number
-  rateLimitPerUser?: number
-//  recipients?: User[]
-  icon?: string | null
-  ownerId?: Snowflake
-  applicationId?: Snowflake
-  parentId?: Snowflake | null
-  lastPinTimestamp?: string | null
-  rtcRegion?: string | null
-  videoQualityMode?: number
-  messageCount?: number
-  memberCount?: number
-//  threadMetadata?: ThreadMetadata
-//  member?: ThreadMember
-  defaultAutoArchiveDuration?: number
-  permissions?: string
-  flags?: ChannelFlags
-  totalMessageSent?: number
-//  availableTags?: Tag[]
-  appliedTags?: Snowflake[]
-//  defaultReactionEmoji?: DefaultReaction
-  defaultThreadRateLimitPerUser?: number
-  defaultSortOrder?: number | null
-
   constructor(
-    id: Snowflake,
-    type: ChannelType,
-    guildId: Snowflake,
-    position?: number,
-    //  permissionOverwrites?: PermissionOverwrite,
-    name: string = null,
-    topic: string = null,
-    nsfw?: boolean,
-    lastMessageId: Snowflake = null,
-    bitrate?: number,
-    userLimit?: number,
-    rateLimitPerUser?: number,
-    //  recipients?: User[],
-    icon: string = null,
-    ownerId?: Snowflake,
-    applicationId?: Snowflake,
-    parentId: Snowflake = null,
-    lastPinTimestamp: string = null,
-    rtcRegion: string = null,
-    videoQualityMode?: number,
-    messageCount?: number,
-    memberCount?: number,
-    //  threadMetadata?: ThreadMetadata,
-    //  member?: ThreadMember,
-    defaultAutoArchiveDuration?: number,
-    permissions?: string,
-    flags?: ChannelFlags,
-    totalMessageSent?: number,
-//    availableTags?: Tag[],
-    appliedTags?: Snowflake[],
-    //  defaultReactionEmoji?: DefaultReaction,
-    defaultThreadRateLimitPerUser?: number,
-    defaultSortOrder: number = null,
-  ) {
+    public id: Snowflake,
+    public type: ChannelType,
+    public guildId: Snowflake,
+    public position?: number,
+    public permissionOverwrites?: Overwrite,
+    public name: string = null,
+    public topic: string = null,
+    public nsfw?: boolean,
+    public lastMessageId: Snowflake = null,
+    public bitrate?: number,
+    public userLimit?: number,
+    public rateLimitPerUser?: number,
+    //  public recipients?: User[],
+    public icon: string = null,
+    public ownerId?: Snowflake,
+    public applicationId?: Snowflake,
+    public parentId: Snowflake = null,
+    public lastPinTimestamp: string = null,
+    public rtcRegion: string = null,
+    public videoQualityMode?: VideoQualityMode,
+    public messageCount?: number,
+    public memberCount?: number,
+    public threadMetadata?: ThreadMetadata,
+    public member?: ThreadMember,
+    public defaultAutoArchiveDuration?: number,
+    public permissions?: string,
+    public flags?: ChannelFlags,
+    public totalMessageSent?: number,
+    public availableTags?: ForumTag[],
+    public appliedTags?: Snowflake[],
+    //  public defaultReactionEmoji?: DefaultReaction,
+    public defaultThreadRateLimitPerUser?: number,
+    public defaultSortOrder: SortOrderType = null,
+  ) {}
+
+  lastPinTimestampDate(): Date {
+    return new Date(this.lastPinTimestamp)
   }
 }
 
@@ -91,4 +60,53 @@ export enum ChannelType {
 export enum ChannelFlags {
   Pinned = 1 << 1,
   RequireTag = 1 << 4
+}
+
+export type Overwrite = {
+  id: Snowflake
+  type: number
+  allow: string
+  deny: string
+}
+
+export enum VideoQualityMode {
+  Auto = 1,
+  Full = 2
+}
+
+export enum SortOrderType {
+  LatestActivity = 0,
+  CreationDate = 1
+}
+
+export class ThreadMetadata {
+  constructor(
+    public archived: boolean,
+    public autoArchiveDuration: number,
+    public archiveTimestamp: string,
+    public locked: boolean,
+    public invitable?: boolean,
+    public createTimestamp: string = null,
+  ) {}
+
+  archiveTimestampDate(): Date {
+    return new Date(this.autoArchiveDuration)
+  }
+
+  createTimestampDate(): Date {
+    return new Date(this.createTimestamp)
+  }
+}
+
+export class ThreadMember {
+  constructor(
+    public id?: Snowflake,
+    public userId?: Snowflake,
+    public joinTimestamp: string,
+    public flags: number
+  ) {}
+
+  joinTimestampDate(): Date {
+    return new Date(this.joinTimestamp)
+  }
 }
